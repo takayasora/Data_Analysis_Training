@@ -12,11 +12,11 @@ print(model.score(x,t))
 
 import pickle
 
-with open("KvsT.pkl","wb") as f:
+with open("Book\Sukkiri_ML\ProjectA\KvsT.pkl","wb") as f:
     pickle.dump(model,f)
 
-with open("KvsT.pkl","rb") as f:
+with open("Book\Sukkiri_ML\ProjectA\KvsT.pkl","rb") as f:
     model2 = pickle.load(f)
 
 suzuki = [[180,75,30]]
-model2.predict(suzuki)
+print(model2.predict(suzuki))
