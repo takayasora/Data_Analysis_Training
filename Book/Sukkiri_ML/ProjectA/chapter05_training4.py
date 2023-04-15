@@ -12,7 +12,9 @@ x = df2[["がく片長さ", "がく片幅", "花弁長さ", "花弁幅"]]
 t = df2["種類"]
 
 model = tree.DecisionTreeClassifier(max_depth=2, random_state=0)
-x_train, x_test, y_train, y_test = train_test_split(x, t, test_size=0.3, random_state=0)
+
+x_train, x_test, y_train, y_test = train_test_split(x, t, test_size=0.2, random_state=0)
+
 print(model.fit(x_train, y_train))
 print(model.score(x_test, y_test))
 
