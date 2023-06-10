@@ -1,5 +1,6 @@
 
 このデータは、モバイル端末に関する20の特徴（id、バッテリー容量、Bluetooth、クロック速度、デュアルSIM、フロントカメラの数、4G、内部メモリ、モバイル重量、コア数、リアカメラの数、画面の高さ、画面の幅、RAM容量、スクリーンの高さ、スクリーンの幅、通話時間、3G、タッチスクリーン、WiFi）を持つ1000のモバイルデバイスに関するものです。 相関係数を見ると、バッテリー容量と価格帯には正の相関関係があることがわかります。 RAM容量と価格帯にも正の相関関係があることがわかります。 同様に、4G、3G、WiFiなどの特徴がある場合、価格帯が高くなる傾向があることがわかります。 反対に、ブルートゥースがある場合、価格帯が低くなる傾向があります。
+<<<<<<< HEAD
 
 この結果から、モバイルデバイスの価格帯は、それに関連するいくつかの機能によって影響を受ける可能性があることがわかります。 モバイルデバイスが高機能であるほど、価格帯も高くなる傾向があるようです。 モバイルデバイスの価格帯を決定する要因を特定し、より高い価格帯での販売を目指して、それらの要因を改善することができる可能性があります。
 
@@ -19,3 +20,141 @@ sklearnで重みづけ関連あるかどうか
 何が重要かどうかを考える必要がある
 
 主成分分析でデータの傾向を見ることがとてもいいかもしれない
+=======
+この結果から、モバイルデバイスの価格帯は、それに関連するいくつかの機能によって影響を受ける可能性があることがわかります。 モバイルデバイスが高機能であるほど、価格帯も高くなる傾向があるようです。 モバイルデバイスの価格帯を決定する要因を特定し、より高い価格帯での販売を目指して、それらの要因を改善することができる可能性があります。
+価格帯(price_range)との相関係数を見ると、battery_power、ram、内部メモリ(int_memory)、3G(three_g)、タッチスクリーン(touch_screen)、Wi-Fi(wifi)といった特徴量が価格帯と相関がある可能性があります。それらの特徴量が高い場合、価格帯も高くなると予測されます。
+たとえば、バッテリーの容量が大きく、RAMや内部メモリが多く、3Gやタッチスクリーン、Wi-Fiに対応しているスマートフォンは、一般的に価格が高くなる傾向があるため、それらの特徴量が高い場合、価格帯が高くなる可能性があります。us
+
+このデータを用いた特徴量エンジニアリングには、以下のような処理が考えられます。 
+1. 特徴量の追加 - 同じ土地に住んでいる人口密度など、関連するデータの追加、または特定の時期に発売されたスマートフォンの評価など、外部データの追加が考えられます。 
+2. 特徴量のスケーリング - モバイルの重さ、メモリ、RAMなど、異なる単位で測定された特徴量の正規化が考えられます。 
+3. 特徴量の変換 - 例えば、スマートフォンの画面サイズの単位を変換する、やスマートフォンの画面の解像度(px_height,px_width)から新しい特徴量を生成する、などの変換が考えられます。 
+4. カテゴリ変数のエンコーディング - blue、dual_sim、four_g、three_g、touch_screen、wifiなどのカテゴリ変数を、One-hotエンコーディングやLabel Encodingなどによって数値に変換します。 
+5. 正しい特徴量の選択 - すべての特徴量を使用せず、効果的な特徴量の選択を行うことができます。適切な特徴選択手法により、モデルの正確性を向上させることができます。 
+
+
+以下の改善が考えられます。
+ 1. 特徴量の生成：データに含まれる各特徴量から新たな特徴量を生成することで、モデルの精度を向上させることができます。例えば、「battery_power」や「clock_speed」といった特徴量の割合を計算することで、新たな特徴量を生成することができます。また、多項式特徴量を生成することも1つの方法です。
+ 2. 特徴量選択：すべての特徴量が必ずしも重要ではありません。特徴量選択を実施して、最も重要度が高い特徴量のみを使用してモデルを学習させることで、精度が向上する可能性があります。
+ 3. ハイパーパラメータの調整：現在のハイパーパラメータの設定を調整して、モデルの精度を向上させることができます。具体的には、GridSearchCVやRandomizedSearchCVのようなツールを使って最適なハイパーパラメータの組み合わせを見つけることができます。
+ 4. アンサンブルの使用：複数の異なるモデルを組み合わせることで、精度を向上させることができます。例えば、ランダムフォレストやサポートベクターマシンなどの他のアルゴリズムを使用して学習させ、それらの結果をアンサンブルさせることができます。また、スタッキングやブレンディングといったアンサンブル手法を利用することも1つの方法です。
+ 5. クロスバリデーションの改善：k 分割交差検証 ( `StratifiedKFold` ) を実施していますが、他の交差検証の方法を試すことで、モデルの精度を向上させることが考えられます。例えば、 `RepeatedStratifiedKFold`  や  `GroupKFold`  などが挙げられます。
+ 6. 欠損値や外れ値の処理：データに欠損値や外れ値が含まれている場合、それらを適切に処理することでモデルの精度を向上させることができます。
+ これらの改善策を試すことにより、モデルの精度が向上する可能性があります。ただし、すべての改善策が効果的であるとは限らないため、実際に試して効果を確認することが重要です。
+
+以下は、携帯電話の機能と価格帯の関係を表した学習用データ（train.csv）から得られた分析結果です。
+
+- 平均バッテリー電力は1238.52で、最小値は501、最大値は1998であった。
+- ほとんどの携帯電話がブルートゥースを有していたが、無い場合もあった。
+- クロックスピードは平均が1.52で、最小値は0.5、最大値は3.0であった。
+- 大部分の携帯電話がデュアルSIMに対応していた。
+- フロントカメラのメガピクセルは平均が4.31で、最小値は0、最大値は19であった。
+- 63%の携帯電話が4Gに対応していた。
+- ほとんどの携帯電話が16GBの内部メモリを持っていたが、その他の容量もあった。
+- 携帯電話の深さは平均が0.5で、最小値は0.1、最大値は1.0であった。
+- 平均携帯電話の重量は140.21で、最小値は80、最大値は200であった。
+- 携帯電話のコア数は平均が4.31で、最小値は1、最大値は8であった。
+- プライマリカメラのメガピクセルは平均が10.51で、最小値は0.3、最大値は20.0であった。
+- ピクセル解像度の高さは平均が645.49で、最小値は0、最大値は1960であった。
+- ピクセル解像度の幅は平均が1251.94で、最小値は500、最大値は1998であった。
+- アクセスメモリは平均が2124.21で、最小値は256、最大値は3998であった。
+- 携帯電話の画面の高さは平均が12.31で、最小値は5、最大値は19であった。
+- 携帯電話の画面幅は平均が5.77で、最小値は0、最大値は9であった。
+- 携帯電話の連続通話時間は平均が11.01で、最小値は2、最大値は20であった。
+- 大部分の携帯電話が3Gに対応していた。
+- タッチスクリーンを搭載した携帯電話が多かった。
+- 無線LANを搭載した携帯電話がほとんどで、有ければ価格が高い傾向がある。
+- 価格帯が高いほどRAMのバリエーションが大きい。
+
+特徴量の正規化
+特徴量の生成
+
+検証
+└クロスバリデーション
+	└
+
+下記のプログラムは、下記のデータを機械学習で分類するプログラムである。
+k 分割交差検証 ( StratifiedKFold ) を使用しているが、GroupKFoldを使用したプログラムに変更せよ
+
+#データの先頭10行のみ
+id,battery_power,blue,clock_speed,dual_sim,fc,four_g,int_memory,m_dep,mobile_wt,n_cores,pc,px_height,px_width,ram,sc_h,sc_w,talk_time,three_g,touch_screen,wifi,price_range
+0,1203,0,0.6809807840000001,1,1,1,23,0.40257961600000003,117,3,2,1331,721,1970,15,1,4,1,0,1,2
+3,1203,1,2.602753503,1,0,0,8,0.415612181,194,1,19,1571,1262,1150,14,16,14,1,0,1,3
+4,1980,1,2.604065402,1,0,0,6,0.8581100629999999,122,2,15,364,721,1970,18,12,11,1,0,1,1
+5,1185,1,2.669402862,1,3,0,33,0.027064762000000003,132,8,4,447,1162,1950,15,3,19,1,0,0,2
+7,1203,1,2.3754531919999997,0,4,1,12,0.141484682,135,6,5,364,1917,1970,16,7,6,1,1,1,0
+8,1203,1,0.499105329,0,2,0,53,0.41297372299999996,102,5,14,1260,1917,1970,16,6,13,1,1,1,1
+9,1977,1,0.512764281,1,3,1,3,0.026462004,198,4,19,68,1633,3624,15,3,6,1,1,0,3
+
+#プログラム
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import StratifiedKFold
+from lightgbm import LGBMClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix
+
+ # データの読み込み
+train = pd.read_csv("./original/train.csv")
+test = pd.read_csv("./original/test.csv")
+
+ # 特徴量と目的変数に分ける
+X_train = train.drop("price_range", axis=1)
+y_train = train["price_range"]
+X_test = test.copy()
+
+ # train_test_splitを使用して学習データを分割する
+from sklearn.model_selection import train_test_split
+X_train_, X_val, y_train_, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
+
+ # 特徴量のスケーリング
+scaler = StandardScaler()
+X_train_ = scaler.fit_transform(X_train_)
+X_test = scaler.transform(X_test)
+
+ # ハイパーパラメータの設定
+params = {
+    'objective': 'multiclass',
+    'num_class': 4,
+    'metric': 'multi_error',
+    'boosting_type': 'gbdt',
+    'n_jobs': -1,
+    'num_leaves': 31,
+    'learning_rate': 0.05,
+    'max_depth': -1,
+    'min_child_samples': 20,
+    'subsample_freq': 1,
+    'subsample': 0.8,
+    'colsample_bytree': 0.6,
+    'reg_alpha': 0.1,
+    'reg_lambda': 0.1,
+    'verbosity': -1,
+    'seed': 42
+}
+
+ # モデルの作成と学習
+n_splits = 5
+skf = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=42)
+oof = np.zeros((len(X_train_), 4))
+y_pred = np.zeros((len(X_test), 4))
+for fold, (train_index, valid_index) in enumerate(skf.split(X_train_, y_train_)):
+    X_tr = X_train_[train_index]
+    y_tr = y_train_.iloc[train_index]
+    X_val = X_train_[valid_index]
+    y_val = y_train_.iloc[valid_index]
+    model = LGBMClassifier(**params)
+    model.fit(X_tr, y_tr, eval_set=[(X_val, y_val)], early_stopping_rounds=100, verbose=False)
+    oof[valid_index] = model.predict_proba(X_val)
+    y_pred += model.predict_proba(X_test) / n_splits
+    
+ # モデルの評価
+y_train_pred = model.predict(X_train_)
+y_val_pred = model.predict(X_val)
+print("Training Accuracy: ", accuracy_score(y_train_, y_train_pred))
+print("Validation Accuracy: ", accuracy_score(y_val, y_val_pred))
+
+ # 予測結果の出力
+y_pred = np.argmax(y_pred, axis=1)
+output = pd.DataFrame({"id": test["id"], "price_range": y_pred})
+output.to_csv("./submission/submission_lgbm_v7.csv", index=False, header=False)
+>>>>>>> e03f65582db2962be01f7b55f7bbfdba492e0a43
