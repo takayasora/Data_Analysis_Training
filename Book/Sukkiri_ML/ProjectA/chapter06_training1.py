@@ -1,5 +1,4 @@
 import pandas as pd
-<<<<<<< Updated upstream
 df = pd.read_csv('Book\Sukkiri_ML\ProjectA\datafiles\cinema.csv')
 df.isnull().any(axis=0)
 
@@ -20,7 +19,6 @@ t = df3['sales']    #正解ラベルの取り出し
 #訓練データとテストデータに分類する
 from sklearn.model_selection import train_test_split
 x_train,x_test,y_train,y_test = train_test_split(x,t,test_size=0.2,random_state=0)
-=======
 
 #CSVファイルの読み込み
 df = pd.read_csv("Book\Sukkiri_ML\ProjectA\datafiles\cinema.csv")
@@ -67,4 +65,3 @@ import pickle
 
 with open("Book\Sukkiri_ML\ProjectA\cinema.pkl","wb") as f:
     pickle.dump(model,f)
->>>>>>> Stashed changes
